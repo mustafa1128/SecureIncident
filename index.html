@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="az">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureIncident | Incident Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="shield">S</span> SecureIncident</a>
+    <nav><a href="#features">Xüsusiyyətlər</a><a href="#dashboard">İdarəetmə</a><a href="#crypto">Kriptoqrafiya</a></nav>
+    <span class="status"><i></i> Cloud-ready</span>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">CYBERSECURITY · IT SERVICE MANAGEMENT</p>
+        <h1>İnsidentləri <span>təhlükəsiz</span> idarə et.</h1>
+        <p class="lead">SecureIncident — insidentlərin qeydiyyatı, komanda üzrə bölüşdürülməsi və faylların şifrələnməsi üçün demo platforma.</p>
+        <a class="primary" href="#dashboard">İdarəetmə panelinə keç <span>↗</span></a>
+        <div class="hero-stats"><div><b>24/7</b><small>İnsident izləmə</small></div><div><b>AES-GCM</b><small>Fayl şifrələmə</small></div><div><b>Cloud DB</b><small>Sinxronizasiya</small></div></div>
+      </div>
+      <div class="hero-card">
+        <div class="card-head"><span>SECURITY OVERVIEW</span><span class="live">● LIVE DEMO</span></div>
+        <div class="score"><div><small>Ümumi insidentlər</small><h2 id="totalCount">03</h2></div><div class="ring">SI</div></div>
+        <div class="mini-row"><span class="dot red"></span><span>Kritik insident</span><b>01</b></div>
+        <div class="mini-row"><span class="dot yellow"></span><span>Araşdırılır</span><b>01</b></div>
+        <div class="mini-row"><span class="dot green"></span><span>Həll olunub</span><b>01</b></div>
+        <div class="activity"><span>●</span> Sistem monitorinqi aktivdir <small>DEMO</small></div>
+      </div>
+    </section>
+    <section id="features" class="feature-grid">
+      <article><div class="feature-icon">⌁</div><h3>Cloud sinxronizasiya</h3><p>Yeni qeydlər Supabase PostgreSQL verilənlər bazasında saxlanıla bilər və fərqli cihazlardan əldə edilə bilər.</p></article>
+      <article><div class="feature-icon">◈</div><h3>Rol əsaslı idarəetmə</h3><p>Admin, HR və IT Support komandaları üçün nümunəvi məsuliyyət bölgüsü.</p></article>
+      <article><div class="feature-icon">⌑</div><h3>Fayl şifrələmə</h3><p>Fayllar brauzerdə AES-GCM ilə şifrələnir. Şifrəni və açarı ayrıca, təhlükəsiz saxla.</p></article>
+    </section>
+    <section id="dashboard" class="dashboard">
+      <div class="section-heading"><div><p class="eyebrow">OPERATIONS CENTER</p><h2>İdarəetmə paneli</h2></div><span id="cloudState" class="pill">Demo / lokal rejim</span></div>
+      <div class="toolbar"><div><label for="role">Cari rol</label><select id="role"><option>Admin</option><option>HR</option><option>IT Support</option></select></div><button id="refreshBtn" class="secondary">↻ Yenilə</button></div>
+      <div id="roleInfo" class="role-info">Admin: bütün insidentlərə baxır, məsul komandanı və statusu dəyişir.</div>
+      <form id="incidentForm" class="incident-form">
+        <div class="field"><label for="title">İnsidentin adı</label><input id="title" required maxlength="100" placeholder="Məs. Şübhəli e-poçt"></div>
+        <div class="field"><label for="department">Məsul komanda</label><select id="department"><option>IT Support</option><option>HR</option><option>Admin</option></select></div>
+        <div class="field"><label for="priority">Prioritet</label><select id="priority"><option>Orta</option><option>Kritik</option><option>Aşağı</option></select></div>
+        <div class="field full"><label for="description">Təsvir</label><textarea id="description" required maxlength="1000" placeholder="İnsidenti qısa təsvir et..."></textarea></div>
+        <button class="primary" type="submit">+ İnsident yarat</button>
+      </form>
+      <div class="table-wrap"><table><thead><tr><th>İnsident</th><th>Komanda</th><th>Prioritet</th><th>Status</th><th>Əməliyyat</th></tr></thead><tbody id="incidentRows"></tbody></table></div>
+      <p class="hint">Qeyd: Cloud bağlantısı qurulmayıbsa, məlumatlar yalnız bu brauzerdə demo məqsədilə saxlanılır.</p>
+    </section>
+    <section id="crypto" class="crypto-section">
+      <div class="section-heading"><div><p class="eyebrow">DATA PROTECTION</p><h2>Kriptoqrafiya laboratoriyası</h2></div><span class="pill secure">AES-GCM · 256-bit</span></div>
+      <p class="muted">Fayl brauzerdə şifrələnir. Demo üçün güclü parol seç. Şifrələnmiş faylı və parolu eyni yerdə saxlama.</p>
+      <div class="crypto-box">
+        <div class="field"><label for="fileInput">Fayl seç</label><input type="file" id="fileInput"></div>
+        <div class="field"><label for="cryptoPassword">Şifrələmə parolu</label><input type="password" id="cryptoPassword" minlength="8" placeholder="Ən azı 8 simvol"></div>
+        <div class="crypto-actions"><button id="encryptBtn" class="primary" type="button">Faylı şifrələ və endir</button><button id="decryptBtn" class="secondary" type="button">.enc faylını aç</button><input type="file" id="encryptedInput" accept=".enc,application/octet-stream" hidden></div>
+        <p id="cryptoMessage" class="hint" aria-live="polite">AES-GCM autentifikasiya ilə şifrələmə tətbiq olunur.</p>
+      </div>
+    </section>
+    <footer><span>© 2026 SecureIncident</span><span>Cloud · Access Control · Cryptography</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
