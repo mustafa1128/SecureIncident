@@ -1,6 +1,6 @@
 // SecureIncident MVP. Cloud mode requires a Supabase project and table from schema.sql.
-const SUPABASE_URL = ""; // Add Project URL from Supabase -> Project Settings -> API
-const SUPABASE_ANON_KEY = ""; // Add publishable/anon key. NEVER put service_role key here.
+const SUPABASE_URL = "https://ynidctugdmffkasenhbm.supabase.co/rest/v1/"; // Add Project URL from Supabase -> Project Settings -> API
+const SUPABASE_ANON_KEY = "sb_publishable_hz6FvjEoFGt67238D4-wDQ_2bQfaB7x"; // Add publishable/anon key. NEVER put service_role key here.
 const cloudEnabled = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase);
 const db = cloudEnabled ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 const demoSeed = [
